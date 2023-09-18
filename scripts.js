@@ -42,11 +42,13 @@ equalsButton.addEventListener("click", function () {
 
 clearButton.addEventListener("click", function () {
     total = 0;
+    display.textContent = total;
     initialValue = "";
     nextValue = "";
     operator = "";
     isOperatorActive = false;
     firstEquationHappened = false;
+    console.log('hit clear button');
 });
 
 const calculator = {
@@ -62,12 +64,22 @@ const calculator = {
                     console.log(total);
                     break;
                 case "*":
-                    total += (Number(initialValue) * Number(nextValue));
-                    console.log(total);
-                    break;
+                    if (firstEquationHappened) {
+                        total *= nextValue;
+                        console.log(total);
+                        break;
+                    } else {
+                        total += (Number(initialValue) * Number(nextValue));
+                        console.log(total);
+                        break;
+                    }
                 case "/":
-                    if (initialValue !== 0 && nextValue != 0) {
+                    if (initialValue !== 0 && nextValue != 0 && firstEquationHappened == false) {
                         total += (Number(initialValue) / Number(nextValue));
+                        console.log(total);
+                        break;
+                    } else if (initialValue !== 0 && nextValue != 0 && firstEquationHappened) {
+                        total /= nextValue
                         console.log(total);
                         break;
                     } else {
