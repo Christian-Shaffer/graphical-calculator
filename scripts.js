@@ -13,16 +13,20 @@ const clearButton = document.querySelector('.clear');
 const display = document.querySelector('.display')
 const deleteButton = document.querySelector('.delete');
 
+const MAX_LENGTH = 15;
+
 for (let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener("click", function () {
         if (isOperatorActive == false) {
-            initialValue += this.textContent
-            console.log(initialValue);
-            calculator.updateDisplay(initialValue);
+            if (initialValue.length < MAX_LENGTH) {
+                initialValue += this.textContent;
+                calculator.updateDisplay(initialValue);
+            }
         } else {
-            nextValue += this.textContent;
-            console.log(nextValue);
-            calculator.updateDisplay(nextValue);
+            if (nextValue.length < MAX_LENGTH) {
+                nextValue += this.textContent;
+                calculator.updateDisplay(nextValue);
+            }
         }
     });
 };
@@ -33,7 +37,6 @@ for (let i = 0; i < operatorButtons.length; i++) {
         calculator.updateDisplay(operator);
         isOperatorActive = true;
         calculator.enableAllButtons();
-        console.log(operator);
     });
 };
 
@@ -54,11 +57,9 @@ clearButton.addEventListener("click", function () {
     isOperatorActive = false;
     firstEquationHappened = false;
     calculator.enableAllButtons();
-    console.log('hit clear button');
 });
 
 deleteButton.addEventListener("click", function () {
-    console.log("Delete button clicked"); 
     calculator.delete();
 });
 
@@ -68,33 +69,27 @@ const calculator = {
             switch (operator) {
                 case "+":
                     total += (Number(initialValue) + Number(nextValue));
-                    console.log(total);
                     break;
                 case "-":
                     total += (Number(initialValue) - Number(nextValue));
-                    console.log(total);
                     break;
                 case "*":
                     if (firstEquationHappened) {
                         total *= nextValue;
-                        console.log(total);
                         break;
                     } else {
                         total += (Number(initialValue) * Number(nextValue));
-                        console.log(total);
                         break;
                     }
                 case "/":
                     if (initialValue !== 0 && nextValue != 0 && firstEquationHappened == false) {
                         total += (Number(initialValue) / Number(nextValue));
-                        console.log(total);
                         break;
                     } else if (initialValue !== 0 && nextValue != 0 && firstEquationHappened) {
                         total /= nextValue
-                        console.log(total);
                         break;
                     } else {
-                        total = "Divide by zero error";
+                        total = "Lol don't do that";
                         this.updateDisplay(total);
                         this.disableAllButtons();
                         return;
@@ -102,7 +97,11 @@ const calculator = {
             }
         }
         if (typeof total === 'number') {
-            total = parseFloat(total.toFixed(7));
+            if (Math.abs(total) > 1e+12) {
+                total = total.toExponential(4);
+            } else {
+                total = parseFloat(total.toFixed(7));
+            }
         }
         this.updateDisplay(total);
         initialValue = "";

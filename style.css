@@ -21,6 +21,7 @@ button {
     font-size: 25px;
     font-weight: 700;
     padding: 25px;
+    border: 0;
     color: #DFDFDF;
     background-color: #616161;
     border: 0px solid transparent;
@@ -33,6 +34,10 @@ button:hover {
     background: gray;
     color: #000;
     transform: translateY(-0.2rem);
+}
+
+button:focus {
+    outline: none;
 }
 
 .display-container {
