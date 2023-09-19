@@ -5,7 +5,6 @@ let operator = "";
 let isOperatorActive = false;
 let firstEquationHappened = false;
 let displayText = "";
-let isDisplayFrozen = false;
 
 const numberButtons = document.getElementsByClassName("number");
 const operatorButtons = document.getElementsByClassName("operator")
@@ -108,23 +107,18 @@ const calculator = {
         calculator.updateDisplay(total);
     },
     delete: function() {
-        if (isDisplayFrozen == false) {
-            if (isOperatorActive) {
-                nextValue = nextValue.slice(0, -1);
-                calculator.updateDisplay(nextValue);
-                console.log('Deleted last character, operator detected');
-            } else {
-                initialValue = initialValue.slice(0, -1);
-                calculator.updateDisplay(initialValue);
-                console.log('Deleted last character, operator not detected');
-            }
+        if (isOperatorActive) {
+            nextValue = nextValue.slice(0, -1);
+            calculator.updateDisplay(nextValue);
+            console.log('Deleted last character, operator detected');
+        } else {
+            initialValue = initialValue.slice(0, -1);
+            calculator.updateDisplay(initialValue);
+            console.log('Deleted last character, operator not detected');
         }
     },
     updateDisplay: function(value) {
         display.textContent = value;
-        if (value == total) {
-            isDisplayFrozen = true;
-        }
     },
     disableNumberButtons: function () {
         for (let i = 0; i < numberButtons.length; i++) {
