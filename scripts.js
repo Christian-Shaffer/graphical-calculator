@@ -32,7 +32,7 @@ for (let i = 0; i < operatorButtons.length; i++) {
         operator = this.textContent;
         calculator.updateDisplay(operator);
         isOperatorActive = true;
-        calculator.enableNumberButtons();
+        calculator.enableAllButtons();
         console.log(operator);
     });
 };
@@ -94,12 +94,15 @@ const calculator = {
                         console.log(total);
                         break;
                     } else {
-                        total = "Divide by 0 error - hit clear button";
+                        total = "Divide by zero error";
                         this.updateDisplay(total);
                         this.disableAllButtons();
                         return;
                     }
             }
+        }
+        if (typeof total === 'number') {
+            total = parseFloat(total.toFixed(7));
         }
         this.updateDisplay(total);
         initialValue = "";

@@ -7,7 +7,7 @@
 .calculator {
     display: flex;
     background-color: #212121;
-    padding: 10px;
+    padding: 25px;
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 420px;
@@ -18,9 +18,9 @@
 }
 
 button {
-    font-size: 1.325rem;
+    font-size: 25px;
     font-weight: 700;
-    padding: 35px;
+    padding: 25px;
     color: #DFDFDF;
     background-color: #616161;
     border: 0px solid transparent;
@@ -54,7 +54,6 @@ button:hover {
 
 .delete, .clear, .equals {
     border-radius: 10px;
-    font-size: 25px;
 }
 
 .row {
@@ -64,11 +63,11 @@ button:hover {
 }
 
 .delete, .clear {
-    flex: 2.5;
+    flex: 2.1;
 }
 
 .row.sixth .equals {
-    flex: 4.5;
+    flex: 3.5;
 }
 
 .operator, .number {
