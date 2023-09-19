@@ -58,6 +58,7 @@ clearButton.addEventListener("click", function () {
 });
 
 deleteButton.addEventListener("click", function () {
+    console.log("Delete button clicked"); 
     calculator.delete();
 });
 
@@ -109,11 +110,9 @@ const calculator = {
         if (isOperatorActive) {
             nextValue = nextValue.slice(0, -1);
             this.updateDisplay(nextValue);
-            console.log('Deleted last character, operator detected');
         } else {
             initialValue = initialValue.slice(0, -1);
             this.updateDisplay(initialValue);
-            console.log('Deleted last character, operator not detected');
         }
     },
     updateDisplay: function(value) {
@@ -122,6 +121,7 @@ const calculator = {
     disableNumberButtons: function () {
         for (let i = 0; i < numberButtons.length; i++) {
             numberButtons[i].disabled = true;
+            deleteButton.disabled = true;
         }
     },
     disableAllButtons: function () {
