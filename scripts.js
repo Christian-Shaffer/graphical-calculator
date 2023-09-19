@@ -27,7 +27,7 @@ for (let i = 0; i < numberButtons.length; i++) {
     });
 };
 
-for (let i = 0; i < operatorButtons.length; i++) {
+for (let i = 0; i < operatorButtons.length; i++) { 
     operatorButtons[i].addEventListener("click", function () {
         operator = this.textContent;
         calculator.updateDisplay(operator);
@@ -94,26 +94,25 @@ const calculator = {
                         break;
                     } else {
                         total = "Divide by 0 error - hit clear button";
-                        calculator.updateDisplay(total);
-                        calculator.disableAllButtons();
+                        this.updateDisplay(total);
+                        this.disableAllButtons();
                         return;
-                        // Disable other buttons here
                     }
             }
         }
+        this.updateDisplay(total);
         initialValue = "";
         nextValue = "";
         isOperatorActive = false;
-        calculator.updateDisplay(total);
     },
     delete: function() {
         if (isOperatorActive) {
             nextValue = nextValue.slice(0, -1);
-            calculator.updateDisplay(nextValue);
+            this.updateDisplay(nextValue);
             console.log('Deleted last character, operator detected');
         } else {
             initialValue = initialValue.slice(0, -1);
-            calculator.updateDisplay(initialValue);
+            this.updateDisplay(initialValue);
             console.log('Deleted last character, operator not detected');
         }
     },
@@ -141,10 +140,3 @@ const calculator = {
         document.querySelectorAll("button").forEach(button => button.disabled = false);
     }
 };
-
-
-
-// for (let i = 0; i < numberButtons.length; i++) {
-//     numberButtons[i].addEventListener("click", function () {
-
-// Once disable buttons working, rework the frozen display part
