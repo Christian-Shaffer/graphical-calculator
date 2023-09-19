@@ -54,7 +54,7 @@ clearButton.addEventListener("click", function () {
     operator = "";
     isOperatorActive = false;
     firstEquationHappened = false;
-    calculator.enableNumberButtons();
+    calculator.enableAllButtons();
     console.log('hit clear button');
 });
 
@@ -96,6 +96,7 @@ const calculator = {
                     } else {
                         total = "Divide by 0 error - hit clear button";
                         calculator.updateDisplay(total);
+                        calculator.disableAllButtons();
                         return;
                         // Disable other buttons here
                     }
@@ -130,12 +131,24 @@ const calculator = {
             numberButtons[i].disabled = true;
         }
     },
+    disableAllButtons: function () {
+        document.querySelectorAll("button").forEach(button => {
+            if (!button.classList.contains("clear")) {
+              button.disabled = true;
+            }
+          });
+    },
     enableNumberButtons: function () {
         for (let i = 0; i < numberButtons.length; i++) {
             numberButtons[i].disabled = false;
         }
     },
+    enableAllButtons: function () {
+        document.querySelectorAll("button").forEach(button => button.disabled = false);
+    }
 };
+
+
 
 // for (let i = 0; i < numberButtons.length; i++) {
 //     numberButtons[i].addEventListener("click", function () {
