@@ -11,11 +11,11 @@
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 420px;
-    gap: 8px;
-    margin: 0 auto;
+    gap: 12px;
+    margin: 75px auto 0 auto;
     border-radius: 1rem;
+    box-shadow: 4px 5px 5px 0px rgba(0,0,0,0.5);
 }
-
 
 button {
     font-size: 1.325rem;
@@ -29,14 +29,32 @@ button {
     transition: all .15s ease-in-out;
 }
 
+.display-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 8px 8px 20px 8px;
+    height: 75px;
+    width: 100%;
+    color: white;
+    background-color: rgb(78, 74, 74);
+}
+
+.display {
+    background-color:rgb(78, 74, 74);
+    font-size: 40px;
+    margin-right: 10px;
+}
+
 .delete, .clear, .equals {
-    border-radius: 1.75rem;
+    border-radius: 10px;
+    font-size: 25px;
 }
 
 .row {
     display: flex;
     background-color: #212121;
-    gap: 5px;
+    gap: 12px;
 }
 
 .delete, .clear {
@@ -44,10 +62,16 @@ button {
 }
 
 .row.sixth .equals {
-    flex: 4.2;
+    flex: 4.5;
 }
 
 .operator, .number {
     flex: 1;  
 }
 
+.author {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 14px;
+}
