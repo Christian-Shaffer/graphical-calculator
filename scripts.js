@@ -5,23 +5,25 @@ let operator = "";
 let isOperatorActive = false;
 let firstEquationHappened = false;
 let displayText = "";
+let isDisplayFrozen = false;
 
 const numberButtons = document.getElementsByClassName("number");
 const operatorButtons = document.getElementsByClassName("operator")
 const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
 const display = document.querySelector('.display')
+const deleteButton = document.querySelector('.delete');
 
 for (let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener("click", function () {
         if (isOperatorActive == false) {
             initialValue += this.textContent
             console.log(initialValue);
-            display.textContent = initialValue;
+            calculator.updateDisplay(initialValue);
         } else {
             nextValue += this.textContent;
             console.log(nextValue);
-            display.textContent = nextValue;
+            calculator.updateDisplay(nextValue);
         }
     });
 };
@@ -29,7 +31,7 @@ for (let i = 0; i < numberButtons.length; i++) {
 for (let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener("click", function () {
         operator = this.textContent;
-        display.textContent = operator;
+        calculator.updateDisplay(operator);
         isOperatorActive = true;
         console.log(operator);
     });
@@ -42,13 +44,17 @@ equalsButton.addEventListener("click", function () {
 
 clearButton.addEventListener("click", function () {
     total = 0;
-    display.textContent = total;
+    calculator.updateDisplay(total);
     initialValue = "";
     nextValue = "";
     operator = "";
     isOperatorActive = false;
     firstEquationHappened = false;
     console.log('hit clear button');
+});
+
+deleteButton.addEventListener("click", function () {
+    calculator.delete();
 });
 
 const calculator = {
@@ -83,18 +89,34 @@ const calculator = {
                         console.log(total);
                         break;
                     } else {
-                        let total = "Divide by 0 error - hit clear button";
-                        console.log(total);
-                        return total;
+                        total = "Divide by 0 error - hit clear button";
+                        calculator.updateDisplay(total);
+                        return;
                     }
             }
         }
         initialValue = "";
         nextValue = "";
-        isOperatorActive == false;
-        display.textContent = total;
+        isOperatorActive = false;
+        calculator.updateDisplay(total);
     },
-    updateDisplay: function() {
-        display.textContent
+    delete: function() {
+        if (isDisplayFrozen == false) {
+            if (isOperatorActive) {
+                nextValue = nextValue.slice(0, -1);
+                calculator.updateDisplay(nextValue);
+                console.log('Deleted last character, operator detected');
+            } else {
+                initialValue = initialValue.slice(0, -1);
+                calculator.updateDisplay(initialValue);
+                console.log('Deleted last character, operator not detected');
+            }
+        }
+    },
+    updateDisplay: function(value) {
+        display.textContent = value;
+        if (value == total) {
+            isDisplayFrozen = true;
+        }
     }
 };
