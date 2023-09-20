@@ -2,10 +2,6 @@ Following along with The Odin Project, the final assignment in the foundations c
 
 https://www.theodinproject.com/lessons/foundations-calculator
 
-This is a work in progress. 
+The assignment has been completed! I may go back and add keyboard functionality at a later time.
 
-Next steps:
-
-- Make it so number buttons are disabled between a total being outputted and a new operator being selected. Doesn't need to be visually disabled.
-- Simplify logic behind isDisplayFrozen and firstEquationHappened. 
-- Add CSS
+Link to live version: https://christian-shaffer.github.io/graphical-calculator/
